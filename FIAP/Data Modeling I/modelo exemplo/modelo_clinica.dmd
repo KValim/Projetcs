@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="modelo_clinica" id="096FA318-F3D1-370A-1566-953013CA3BC5" version="3.5">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-03 22:30:53 UTC</createdTime>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>096FA318-F3D1-370A-1566-953013CA3BC5</designId>
+</OSDM_Design>

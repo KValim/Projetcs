@@ -1,0 +1,49 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "type": "object",
+    "title": "livro",
+    "properties": {
+        "titulo": {
+            "type": "string"
+        },
+        "anoPublicacao": {
+            "type": "number"
+        },
+        "genero": {
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "type": "string"
+            }
+        },
+        "autor": {
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "nomeAutor": {
+                        "type": "string"
+                    },
+                    "nascimento": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "editora": {
+            "type": "object",
+            "properties": {
+                "nomeEditora": {
+                    "type": "string"
+                },
+                "anoCriacao": {
+                    "type": "number"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
