@@ -1,0 +1,18 @@
+{
+    "nomeMedico": "Lorem",
+    "rg": {
+        "emissao": "Lorem",
+        "numero": "Lorem"
+    },
+    "especialidade": [
+        "Lorem"
+    ],
+    "periodoAtendimento": [
+        "Lorem"
+    ],
+    "crm": {
+        "estado": "Lorem",
+        "numero": "Lorem"
+    },
+    "flagCirurgia": true
+}

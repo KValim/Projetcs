@@ -1,0 +1,6 @@
+def getSimilares(usuario):
+  listaSimilaridade = [(similaridade(usuario, outro), outro)
+      for outro in clientes if outro != usuario]
+  listaSimilaridade.sort()
+  listaSimilaridade.reverse()
+  return listaSimilaridade
