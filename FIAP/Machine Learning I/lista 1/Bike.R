@@ -9,7 +9,7 @@ library(fastDummies)
 library(PerformanceAnalytics)
 library(RCurl)
 
-url =  getURL("https://raw.githubusercontent.com/KValim/Projetcs/main/FIAP/Machine%20Learning%20I/dataset/Bike_Sharing.csv")
+url =  getURL("https://raw.githubusercontent.com/KValim/Projetcs/main/FIAP/Machine%20Learning%20I/lista%201/dataset/Bike_Sharing.csv")
 df = read.csv(text = url)
 
 str(df)
