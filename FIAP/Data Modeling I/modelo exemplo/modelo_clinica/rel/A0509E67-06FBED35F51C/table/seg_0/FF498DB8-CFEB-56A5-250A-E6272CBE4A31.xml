@@ -1,0 +1,78 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FF498DB8-CFEB-56A5-250A-E6272CBE4A31" name="DEPENDENTE">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<generatorID>6943F764-104B-6545-4B49-1B585B9DDC1A</generatorID>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="COD_DEPENDENTE" id="148640A4-2431-7358-D2A4-FF2F33606321">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<generatorID>8EBF8E33-7753-D2BE-AADF-283EC68D1500</generatorID>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NOME_DEPENDENTE" id="0A1ED85B-1A7F-C6FF-7612-EEE7E9B7789D">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<commentInRDBMS><![CDATA[Nome do depentente do seguro saude]]></commentInRDBMS>
+<generatorID>DC8E9B92-1B42-CEEF-396E-DB157C05E0CF</generatorID>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PACIENTE_CODIGO_PACIENTE" id="B12F4231-86E2-23CB-4C0E-66B12299D008">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<generatorID>70DA6757-D361-27B7-EBA4-04DAB7F9F009</generatorID>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>15</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7DAF172C-101F-B71B-53EE-62E8C4D94047" referredColumn="65E4F6E6-9A85-219D-1FCA-CA4EF2EF768C"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8972D91E-E621-CF73-A29E-C355A1D59EC7" name="DEPENDENTE_PK">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<generatorID>1044B64D-F93A-68D6-6259-9E66D5C01DE7</generatorID>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="148640A4-2431-7358-D2A4-FF2F33606321"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="66B7703A-7F52-CDCA-3E05-D547BEA6FB37" name="DEPENDENTE_PACIENTE_FK">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<generatorID>2AB86E34-8D98-B911-91ED-EB577DE62CCF</generatorID>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B12F4231-86E2-23CB-4C0E-66B12299D008"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

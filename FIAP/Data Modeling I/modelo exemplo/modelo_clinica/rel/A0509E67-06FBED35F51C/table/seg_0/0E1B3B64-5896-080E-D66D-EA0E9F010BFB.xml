@@ -1,0 +1,90 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0E1B3B64-5896-080E-D66D-EA0E9F010BFB" name="CONSULTA">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="MEDICO_COD_MEDICO" id="0632ADE1-A377-3F32-6713-6B59377923E2">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7F7A8F9A-F6CD-D063-EF25-CCDBFF70E2D6" referredColumn="6770EB22-327A-3D5B-949F-08EB6F5333AA"/>
+</associations>
+</Column>
+<Column name="PACIENTE_CODIGO_PACIENTE" id="C5A54533-5596-1B70-09A3-3A5026B424D8">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>15</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="34FA52CB-85DB-41A2-2BF1-7C1535E09D13" referredColumn="65E4F6E6-9A85-219D-1FCA-CA4EF2EF768C"/>
+</associations>
+</Column>
+<Column name="DATA_HORA" id="DFD1D9CC-A055-1814-1A01-322D420A4AFD">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<generatorID>7CE8CE31-326D-645C-8236-7F8892B8D2FC</generatorID>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+<isDependOnFK_AsMandatory>true</isDependOnFK_AsMandatory>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4360CB32-0795-6C77-F602-450DD676ABCD" name="CONSULTA_PK">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0632ADE1-A377-3F32-6713-6B59377923E2"/>
+<colUsage columnID="C5A54533-5596-1B70-09A3-3A5026B424D8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DFF4C19A-9AD6-0A12-F4A0-922E1C0BD745" name="CONSULTA_MEDICO_FK">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<generatorID>D47D52A0-1C32-6A3D-A499-E398816B67FD</generatorID>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0632ADE1-A377-3F32-6713-6B59377923E2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B119A3FA-AD84-AE47-3C9E-2C7A5DBDE95B" name="CONSULTA_PACIENTE_FK">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-04 01:16:57 UTC</createdTime>
+<generatorID>D47D52A0-1C32-6A3D-A499-E398816B67FD</generatorID>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C5A54533-5596-1B70-09A3-3A5026B424D8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

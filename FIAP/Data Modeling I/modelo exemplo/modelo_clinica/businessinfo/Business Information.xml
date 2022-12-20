@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="17A67890-6B96-5D41-FE16-D6234E5D902B">
+<createdBy>KAIQUEHENRIQUEVALIM</createdBy>
+<createdTime>2022-10-03 22:30:53 UTC</createdTime>
+<ownerDesignName>modelo_clinica</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>
