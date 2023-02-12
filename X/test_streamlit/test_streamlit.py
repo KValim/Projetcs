@@ -189,12 +189,9 @@ password_input = st.text_input("Enter password", type='password')
 if password_input:
     st.write("Password entered successfully.")
 
-st.header("Text Area")
-text_area = st.text_area("Enter your message")
-if text_area:
-    st.write("Your message is:", text_area)
-
 st.header("File Uploader")
 file_uploader = st.file_uploader("Upload your file", type=["txt", "pdf", "png"])
 if file_uploader:
     st.write("File uploaded successfully.")
+    
+
