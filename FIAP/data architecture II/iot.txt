@@ -1,0 +1,25 @@
+Exercício 1
+
+CREATE TABLE sensores_region_date (
+weatherstation_id text,
+event_time timestamp,
+temperatura text,
+date text,
+umidade text,
+regiao text,
+PRIMARY KEY (weatherstation_id,event_time)
+);
+
+
+
+Exercício 2
+
+CREATE TABLE temperatura_regiao_dia (
+id text,
+date text,
+event_time timestamp,
+max_temp text,
+min_temp text,
+regiao text,
+PRIMARY KEY ((id,date,regiao),event_time)
+);
