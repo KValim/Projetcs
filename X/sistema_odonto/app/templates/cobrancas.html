@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Cobranças</h2>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>ID da Consulta</th>
+            <th>Data de Vencimento</th>
+            <th>Valor Total</th>
+            <th>Status</th>
+        </tr>
+        {% for cobranca in cobrancas %}
+            <tr>
+                <td>{{ cobranca.id }}</td>
+                <td>{{ cobranca.id_consulta }}</td>
+                <td>{{ cobranca.data_de_vencimento }}</td>
+                <td>{{ cobranca.valor_total }}</td>
+                <td>{{ cobranca.status }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('nova_cobranca') }}" class="btn btn-primary">Adicionar Cobrança</a>
+  </div>
+{% endblock %}

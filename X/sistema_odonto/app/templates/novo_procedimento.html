@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Adicionar Procedimento</h2>
+    <form id="procedimento-form" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" required>
+        <br>
+        <label for="descricao">Descrição:</label>
+        <textarea name="descricao" id="descricao" required></textarea>
+        <br>
+        <label for="preco">Preço:</label>
+        <input type="text" name="preco" id="preco" required>
+        <br>
+        <input type="submit" value="Adicionar">
+    </form>
+
+    <script>
+        document.getElementById('procedimento-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+        
+            const nome = document.getElementById('nome').value;
+            const descricao = document.getElementById('descricao').value;
+            const preco = document.getElementById('preco').value;
+        
+            let errorMessage = '';
+        
+            if (nome.length < 3) {
+                errorMessage += 'O nome do procedimento deve ter pelo menos 3 caracteres.\n';
+            }
+        
+            if (descricao.length < 5) {
+                errorMessage += 'A descrição deve ter pelo menos 5 caracteres.\n';
+            }
+        
+            const precoRegex = /^\d+(\.\d{2})?$/;
+            if (!precoRegex.test(preco)) {
+                errorMessage += 'O preço deve ser um número válido com duas casas decimais (por exemplo, 150.00).\n';
+            }
+        
+            if (errorMessage) {
+                alert(errorMessage);
+            } else {
+                this.submit();
+            }
+        });
+        
+    </script>
+{% endblock %}

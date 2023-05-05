@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Consultas</h2>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>ID do Cliente</th>
+            <th>Data e Hora da Consulta</th>
+            <th>Observações</th>
+        </tr>
+        {% for consulta in consultas %}
+            <tr>
+                <td>{{ consulta.id }}</td>
+                <td>{{ consulta.id_cliente }}</td>
+                <td>{{ consulta.data_e_hora_da_consulta }}</td>
+                <td>{{ consulta.observacoes }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('nova_consulta') }}" class="btn btn-primary">Adicionar Consulta</a>
+  </div>
+{% endblock %}

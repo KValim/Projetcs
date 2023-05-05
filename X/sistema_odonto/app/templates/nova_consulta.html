@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Adicionar Consulta</h2>
+    <form method="POST">
+        <label for="id_cliente">ID Cliente:</label>
+        <input type="number" name="id_cliente" required>
+        <br>
+        <label for="data_e_hora_da_consulta">Data e Hora da Consulta:</label>
+        <input type="datetime-local" name="data_e_hora_da_consulta" required>
+        <br>
+        <label for="observacoes">Observações:</label>
+        <textarea name="observacoes"></textarea>
+        <br>
+        <input type="submit" value="Salvar">
+    </form>
+{% endblock %}

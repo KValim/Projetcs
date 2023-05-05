@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Adicionar Cobrança</h2>
+    <form method="POST">
+        <label for="id_consulta">ID Consulta:</label>
+        <input type="number" name="id_consulta" required>
+        <br>
+        <label for="data_de_vencimento">Data de Vencimento:</label>
+        <input type="date" name="data_de_vencimento" required>
+        <br>
+        <label for="valor_total">Valor Total:</label>
+        <input type="number" name="valor_total" required>
+        <br>
+        <label for="status">Status:</label>
+        <select name="status" required>
+            <option value="Pendente">Pendente</option>
+            <option value="Pago">Pago</option>
+        </select>
+        <br>
+        <input type="submit" value="Salvar">
+    </form>
+{% endblock %}
