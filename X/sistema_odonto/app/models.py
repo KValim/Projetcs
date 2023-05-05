@@ -11,7 +11,7 @@ class Cliente(db.Model):
 
 class Procedimento(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    procedimento = db.Column(db.String(100), nullable=False)
+    # procedimento = db.Column(db.String(100), nullable=False)
     descricao = db.Column(db.String(200), nullable=False)
     preco = db.Column(db.Float, nullable=False)
 
