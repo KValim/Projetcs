@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from app import app, db
-from app.models import User, Cliente, Procedimento, Consulta, ConsultaProcedimento, Cobranca
+from app.models import User, Client, Procedimento, Consulta, ConsultaProcedimento, Cobranca
 
 
 @app.route('/register', methods=['GET', 'POST'])

@@ -3,8 +3,8 @@
 {% block content %}
     <h2>Editar Consulta</h2>
     <form method="POST">
-        <label for="id_cliente">ID Cliente:</label>
-        <input type="number" name="id_cliente" value="{{ consulta.id_cliente }}" required>
+        <label for="id_client">ID Cliente:</label>
+        <input type="number" name="id_client" value="{{ consulta.id_client }}" required>
         <br>
         <label for="data_e_hora_da_consulta">Data e Hora da Consulta:</label>
         <input type="datetime-local" name="data_e_hora_da_consulta" value="{{ consulta.data_e_hora_da_consulta.strftime('%Y-%m-%dT%H:%M') }}" required>

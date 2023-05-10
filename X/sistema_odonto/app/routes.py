@@ -1,56 +1,53 @@
 from flask import render_template, request, redirect, url_for
 from app import app, db
-from app.models import Cliente, Procedimento, Consulta, ConsultaProcedimento, Cobranca
+from app.models import Client, Procedimento, Consulta, ConsultaProcedimento, Cobranca
 from datetime import datetime
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# Adicione suas rotas e funções de visualização aqui, por exemplo:
-# Rotas para adicionar, editar, excluir e listar clientes, procedimentos, consultas e cobranças.
+# Client
+@app.route('/client')
+def client():
+    client = Client.query.all()
+    return render_template('client.html', clients=client)
 
-# Clientes
-@app.route('/clientes')
-def clientes():
-    clientes = Cliente.query.all()
-    return render_template('clientes.html', clientes=clientes)
-
-@app.route('/clientes/novo', methods=['GET', 'POST'])
-def novo_cliente():
-    nome = request.form['nome']
-    data_de_nascimento = request.form['data_de_nascimento']
+@app.route('/client/new', methods=['GET', 'POST'])
+def new_client():
+    name = request.form['name']
+    birthday = request.form['birthday']
     cpf = request.form['cpf']
-    telefone = request.form['telefone']
-    endereco = request.form['endereco']
+    phone = request.form['phone']
+    address = request.form['address']
     email = request.form['email']
 
-    # Convertendo a string da data em um objeto date
-    data_de_nascimento = datetime.strptime(data_de_nascimento, '%Y-%m-%d').date()
+    # Birthday string to date
+    birthday = datetime.strptime(birthday, '%Y-%m-%d').date()
 
-    cliente = Cliente(nome=nome, data_de_nascimento=data_de_nascimento, cpf=cpf, telefone=telefone, endereco=endereco, email=email)
-    db.session.add(cliente)
+    client = Client(nome=nome, birthday=birthday, cpf=cpf, phone=phone, address=address, email=email)
+    db.session.add(client)
     db.session.commit()
 
-    return redirect(url_for('clientes'))
+    return redirect(url_for('client'))
 
-@app.route('/clientes/editar/<int:cliente_id>', methods=['GET'])
-def editar_cliente(cliente_id):
-    cliente = Cliente.query.get_or_404(cliente_id)
-    return render_template('editar_clientes.html', cliente=cliente)
+@app.route('/client/edit/<int:client_id>', methods=['GET'])
+def edit_client(client_id):
+    client = Client.query.get_or_404(client_id)
+    return render_template('edit_client.html', client=client)
 
-@app.route('/clientes/atualizar/<int:cliente_id>', methods=['POST'])
-def atualizar_cliente(cliente_id):
-    cliente = Cliente.query.get_or_404(cliente_id)
-    cliente.nome = request.form['nome']
-    cliente.data_de_nascimento = datetime.strptime(request.form['data_de_nascimento'], '%Y-%m-%d').date()
-    cliente.cpf = request.form['cpf']
-    cliente.telefone = request.form['telefone']
-    cliente.endereco = request.form['endereco']
-    cliente.email = request.form['email']
+@app.route('/client/update/<int:client_id>', methods=['POST'])
+def update_client(client_id):
+    client = Client.query.get_or_404(client_id)
+    client.name = request.form['name']
+    client.birthday = datetime.strptime(request.form['birthday'], '%Y-%m-%d').date()
+    client.cpf = request.form['cpf']
+    client.phone = request.form['phone']
+    client.address = request.form['address']
+    client.email = request.form['email']
     
     db.session.commit()
-    return redirect(url_for('clientes'))
+    return redirect(url_for('client'))
 
 
 
