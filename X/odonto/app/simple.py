@@ -8,7 +8,7 @@ import os
 import phonenumbers
 
 app = Flask(__name__)
-basedir = r'C:\Users\KAIQUEHENRIQUEVALIM\Documents\GitHub\Projetcs\X\odonto\instance'
+basedir = r'..\instance'
 
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
