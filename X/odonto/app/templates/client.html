@@ -24,16 +24,36 @@
             <td>{{ client.name }}</td>
             <td>{{ client.birthday }}</td>
             <td>{{ client.cpf }}</td>
-            <td>{{ client.phone }}</td>
+            <td>{{ format_phone_number(client.phone) }}</td>
             <td>{{ client.email }}</td>
             <td>
-              <a href="#" class="btn btn-custom btn-sm rounded-pill">Editar</a>
-              <a href="#" class="btn btn-custom btn-sm rounded-pill">Excluir</a>
-
+              <a href="{{ url_for('client_edit', client_id=client.id) }}" class="btn btn-custom btn-sm rounded-pill">Editar</a>
+              <a href="#" class="btn btn-custom btn-sm rounded-pill delete-btn" data-id="{{ client.id }}">Excluir</a>
             </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
+
+  <script>
+    $(document).ready(function() {
+      console.log("JavaScript is running!");
+      $('.delete-btn').on('click', function(e) {
+        e.preventDefault();
+
+        var btn = $(this);
+        var clientId = btn.data('id');
+
+        console.log("Button clicked, client ID: " + clientId);
+
+        if (btn.hasClass('btn-confirm')) {
+          window.location.href = "/delete_client/" + clientId;
+        } else {
+          btn.addClass('btn-confirm').text('! Excluir !');
+        }
+      });
+    });
+  </script>
+
 {% endblock %}

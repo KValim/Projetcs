@@ -1,27 +1,36 @@
-{% extends "client.html" %}
+{% extends 'client.html' %}
 
 {% block content %}
     <h2>Editar Cliente</h2>
-    <form action="{{ url_for('update_client', client_id=client.id) }}" method="POST">
-        <input type="hidden" name="_method" value="PUT">
+    <style>
+        input[type="text"], input[type="email"], input[type="date"] {
+            width: 450px;  /* Adjust as needed */
+        }
+    </style>
+    <form method="POST">
         <label for="name">Nome:</label>
-        <input type="text" id="name" name="name" value="{{ client.name }}" required><br><br>
-
+        <input type="text" name="name" value="{{ client.name }}" required>
+        <br>
         <label for="birthday">Data de Nascimento:</label>
-        <input type="date" id="birthday" name="birthday" value="{{ client.birthday }}" required><br><br>
-
+        <input type="date" name="birthday" value="{{ client.birthday }}" required>
+        <br>
         <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" value="{{ client.cpf }}" required><br><br>
-
+        <input type="text" name="cpf" value="{{ client.cpf }}" required>
+        <br>
         <label for="phone">Telefone:</label>
-        <input type="text" id="phone" name="phone" value="{{ client.phone }}" required><br><br>
-
+        <input type="text" name="phone" value="{{ client.phone }}" required>
+        <br>
         <label for="address">Endereço:</label>
-        <input type="text" id="address" name="address" value="{{ client.address }}" required><br><br>
-
+        <input type="text" name="address" value="{{ client.address }}" required>
+        <br>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="{{ client.email }}" required><br><br>
-
-        <input type="submit" value="Atualizar">
+        <input type="email" name="email" value="{{ client.email }}" required>
+        <br>
+        <input type="submit" value="Salvar">
     </form>
+    {% if error %}
+    <script type="text/javascript">
+        alert("{{ error }}");
+    </script>
+    {% endif %}
 {% endblock %}

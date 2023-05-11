@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Odonto</title>
-    <!-- Adicione suas folhas de estilo e/ou arquivos JavaScript aqui -->
     <link rel="stylesheet" href="/static/css/style.css">
+    
+    <h2 class="title">Anya Odonto Studio</h2>
+    <!-- Adicione suas folhas de estilo e/ou arquivos JavaScript aqui -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body> 
     <header>
-        <h1>Sistema Odonto</h1>
+        <h1></h1>
     </header>
     
     <nav>
         <!-- Adicione seus links de navegação aqui, por exemplo: -->
         <a href="{{ url_for('home') }}">Home</a>
-        <a href="{{ url_for('client') }}">Client</a>
+        <a href="{{ url_for('client') }}">Clientes</a>
         <a href="{{ url_for('del_db') }}">Delete DB</a>
         <a href="{{ url_for('create_db') }}">Create DB</a>
     </nav>
@@ -26,7 +29,8 @@
     </main>
     
     <footer>
-        <p>&copy; 2023 - Sistema Odonto</p>
+        <p>&copy; 2023 - Anya Odonto Studio</p>
     </footer>
+    
 </body>
 </html>
