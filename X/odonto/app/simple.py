@@ -1,6 +1,7 @@
 from flask import Flask, flash, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from sqlalchemy import or_
 from datetime import datetime
 
 import re
@@ -38,6 +39,18 @@ class Client(db.Model):
         self.phone = phone
         self.address = address
         self.email = email
+        
+        
+class Procedure(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    price = db.Column(db.Float(15), nullable=False)
+
+    def __init__(self, name, description, price):
+        self.name = name
+        self.description = description
+        self.price = price
 
 
 
@@ -58,6 +71,7 @@ def create_db():
     return render_template('index.html')
 
 
+
 ### HOME
 
 @app.route('/')
@@ -65,14 +79,25 @@ def home():
     return render_template('index.html')
 
 
+
+
 ### CLIENTE
 
 @app.route('/client')
 def client():
-    clients_in_db = Client.query.all()
-    return render_template('client.html', clients=clients_in_db)
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', None, type=int)
+    search = request.args.get('search', '')
 
+    if search:
+        query = Client.query.filter(Client.name.ilike(f'%{search}%'))
+    else:
+        query = Client.query
 
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    clients = pagination.items
+
+    return render_template('client.html', clients=clients, pagination=pagination, search=search, per_page=per_page)
 
 
 ## NOVO
@@ -127,13 +152,13 @@ def client_new():  # sourcery skip: low-code-quality
             client = Client(name=name, birthday=birthday, cpf=cpf, phone=phone, address=address, email=email)
             db.session.add(client)
             db.session.commit()
+            
             return redirect(url_for('client'))
 
     return render_template('client_new.html', error=error_message)
 
 
 ## EDIT
-
 
 @app.route('/client_edit/<int:client_id>', methods=['GET', 'POST'])
 def client_edit(client_id):  # sourcery skip: low-code-quality
@@ -198,10 +223,8 @@ def client_edit(client_id):  # sourcery skip: low-code-quality
             client.email = email
             db.session.commit()
             return redirect(url_for('client', client_id=client.id))
-
+        
     return render_template('client_edit.html', client=client, error=error_message, name=name, birthday=birthday, cpf=cpf, phone=phone, address=address, email=email)
-
-
 
 ## DELETE
 @app.route('/delete_client/<int:client_id>', methods=['GET', 'POST'])
@@ -213,6 +236,96 @@ def delete_client(client_id):
     db.session.delete(client)
     db.session.commit()
     return redirect(url_for('client'))  # Redireciona para a página do cliente após a exclusão
+
+
+
+### PROCEDIMENTO
+
+@app.route('/procedure')
+def procedure():
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', None, type=int)
+    search = request.args.get('search', '')
+
+    if search:
+        query = Procedure.query.filter(Procedure.name.ilike(f'%{search}%'))
+    else:
+        query = Procedure.query
+
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    procedures = pagination.items
+
+    return render_template('procedure.html', procedures=procedures, pagination=pagination, search=search, per_page=per_page)
+
+
+@app.route('/procedure_new', methods=['GET', 'POST'])
+def procedure_new():
+    error_message = ''
+    if request.method == 'POST':
+        name = request.form.get('name')
+        description = request.form.get('description')
+        price = request.form.get('price')
+
+        if not all([name, description, price]):
+            error_message = 'Por favor, preencha todos os campos.'
+        else:
+            procedure = Procedure(name=name, description=description, price=price)
+            db.session.add(procedure)
+            db.session.commit()
+            
+            return redirect(url_for('procedure'))
+
+    return render_template('procedure_new.html', error=error_message)
+
+
+@app.route('/procedure_edit/<int:procedure_id>', methods=['GET', 'POST'])
+def procedure_edit(procedure_id):
+    procedure = Procedure.query.get(procedure_id)
+    
+    if procedure is None:
+        return redirect(url_for('error_page')) 
+
+    error_message = ''
+    if request.method == 'POST':
+        name = request.form.get('name')
+        description = request.form.get('description')
+        price = request.form.get('price')
+
+        if not all([name, description, price]):
+            error_message = 'Por favor, preencha todos os campos.'
+        else:
+            if not re.match("^[a-zA-Z\s]*$", name):
+                error_message = 'Nome inválido. Por favor, insira um nome válido.'    
+            if not re.match("^[a-zA-Z\s]*$", description):
+                error_message = 'Descrição inválido. Por favor, insira uma descrição válido.'  
+            if not re.match("^\d+(\.\d{1,2})?$", price):  # Corrigindo a validação do preço
+                error_message = 'Preço inválido. Por favor, insira um preço válido.'  
+            
+        if not error_message:
+            procedure.name = name
+            procedure.description = description
+            procedure.price = price
+            db.session.commit()
+            return redirect(url_for('procedure', procedure_id=procedure.id))
+    else:  # Adicionando esta parte para preencher os campos quando o método for 'GET'
+        name = procedure.name
+        description = procedure.description
+        price = procedure.price
+        
+    return render_template('procedure_edit.html', procedure=procedure, error=error_message, name=name, description=description, price=price)
+
+
+
+@app.route('/delete_procedure/<int:procedure_id>', methods=['GET', 'POST'])
+def delete_procedure(procedure_id):
+    procedure = Procedure.query.get(procedure_id)
+    
+    if procedure is None:
+        return redirect(url_for('error_page')) 
+
+    db.session.delete(procedure)
+    db.session.commit()
+    return redirect(url_for('procedure')) 
 
 
 
@@ -231,8 +344,13 @@ def utility_processor():
         return f"({num[:2]}) {num[2]} {num[3:7]} {num[7:]}"
     return dict(format_phone_number=format_phone_number)
 
+@app.template_filter()
+def currency_format(value):
+    return f'R$ {value:,.2f}'.replace(",", "#").replace(".", ",").replace("#", ".")
+
 
 
 if __name__ == '__main__':
     print(app.config['SQLALCHEMY_DATABASE_URI'])
+    app.debug = True
     app.run()

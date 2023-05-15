@@ -1,0 +1,27 @@
+{% extends 'procedure.html' %}
+
+{% block content %}
+    <h2>Edtar Procedimento</h2>
+    <form method="POST">
+        <label for="name">Procedimento:</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ name }}">
+        <br>
+        <label for="descricao">Descrição:</label>
+        <input type="text" class="form-control" id="description" name="description" value="{{ description }}">
+        <br>
+        <label for="preco">Preço:</label>
+        <input type="number" step="1" class="form-control" id="price" name="price" value="{{ price }}">
+        <br>
+        <input type="submit" value="Salvar">
+    </form>
+
+    {% if error %}
+    <script type="text/javascript">
+        alert("{{ error }}");
+    </script>
+    {% endif %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+{% endblock %}

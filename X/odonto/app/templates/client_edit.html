@@ -1,7 +1,7 @@
 {% extends 'client.html' %}
 
 {% block content %}
-    <h2>Editar Cliente</h2>
+    <h2>Editar Paciente</h2>
     <style>
         input[type="text"], input[type="email"], input[type="date"] {
             width: 450px;  /* Adjust as needed */
@@ -9,22 +9,22 @@
     </style>
     <form method="POST">
         <label for="name">Nome:</label>
-        <input type="text" name="name" value="{{ client.name }}" required>
+        <input type="text" name="name" value="{{ client.name }}" placeholder="João Silva" required>
         <br>
         <label for="birthday">Data de Nascimento:</label>
         <input type="date" name="birthday" value="{{ client.birthday }}" required>
         <br>
         <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" value="{{ client.cpf }}" required>
+        <input type="text" name="cpf" value="{{ client.cpf }}" placeholder="000.000.000-00" required>
         <br>
         <label for="phone">Telefone:</label>
-        <input type="text" name="phone" value="{{ client.phone }}" required>
+        <input type="text" name="phone" value="{{ client.phone }}" placeholder="(00)00000-0000" required>
         <br>
         <label for="address">Endereço:</label>
-        <input type="text" name="address" value="{{ client.address }}" required>
+        <input type="text" name="address" value="{{ client.address }}" placeholder="Rua Exemplo, 123, Cidade, Estado" required>
         <br>
         <label for="email">Email:</label>
-        <input type="email" name="email" value="{{ client.email }}" required>
+        <input type="email" name="email" value="{{ client.email }}" placeholder="exemplo@dominio.com" required>
         <br>
         <input type="submit" value="Salvar">
     </form>
@@ -33,4 +33,22 @@
         alert("{{ error }}");
     </script>
     {% endif %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('input[name="cpf"]').mask('000.000.000-00', {reverse: false});
+            var SPMaskBehavior = function (val) {
+                return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+            },
+            spOptions = {
+                onKeyPress: function(val, e, field, options) {
+                    field.mask(SPMaskBehavior.apply({}, arguments), options);
+                }
+            };
+
+            $('input[name="phone"]').mask(SPMaskBehavior, spOptions);
+        });
+    </script>
+
 {% endblock %}
