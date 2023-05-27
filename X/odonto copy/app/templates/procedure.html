@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <h2 class="text-center mb-4">Lista de Procedimentos</h2>
+    <div class="top-bar">
+      <form class="search-form" method="GET" action="/procedure">
+        <input type="text" name="search" placeholder="Pesquisar por procedimento" value="{{ search }}">
+      <input type="number" name="per_page" placeholder="Qtd. por página" value="{{ per_page }}">
+        <input type="submit" value="Pesquisar">
+      </form>
+    </div>
+    <a href="/procedure_new" class="btn btn-primary">Adicionar Novo Procedimento</a>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Procedimento</th>
+          <th>Descrição</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for procedure in pagination.items %}
+          <tr>
+            <td>{{ procedure.id }}</td>
+            <td>{{ procedure.name }}</td>
+            <td>{{ procedure.description }}</td>
+            <td>{{ procedure.price|currency_format }}</td>
+
+            <td>
+              <a href="{{ url_for('procedure_edit', procedure_id=procedure.id) }}" class="btn btn-custom btn-sm rounded-pill">Editar</a>
+              <a href="#" class="btn btn-custom btn-sm rounded-pill delete-btn" data-id="{{ procedure.id }}">Excluir</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="pagination">
+      {% if pagination.has_prev %}
+        <a href="{{ url_for('procedure', page=pagination.prev_num, per_page=per_page, search=search) }}">Anterior</a>
+      {% endif %}
+      <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
+      {% if pagination.has_next %}
+        <a href="{{ url_for('procedure', page=pagination.next_num, per_page=per_page, search=search) }}">Próxima</a>
+      {% endif %}
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      console.log("JavaScript is running!");
+      $('.delete-btn').on('click', function(e) {
+        e.preventDefault();
+        var btn = $(this);
+        var procedureId = btn.data('id');
+        console.log("Button clicked, procedure ID: " + procedureId);
+        if (btn.hasClass('btn-confirm')) {
+          window.location.href = "/delete_procedure/" + procedureId;
+        } else {
+          btn.addClass('btn-confirm').text('! Excluir !');
+        }
+      });
+    });
+  </script>
+{% endblock %}

@@ -32,7 +32,7 @@
             <td>{{ format_phone_number(client.phone) }}</td>
             <td>{{ client.email }}</td>
             <td>
-              <a href="{{ url_for('client_edit', client_id=client.id) }}" class="btn btn-custom btn-sm rounded-pill">Editar</a>
+              <a href="{{ url_for('clients.client_edit', client_id=client.id) }}" class="btn btn-custom btn-sm rounded-pill">Editar</a>
               <a href="#" class="btn btn-custom btn-sm rounded-pill delete-btn" data-id="{{ client.id }}">Excluir</a>
             </td>
           </tr>
@@ -41,11 +41,11 @@
     </table>
     <div class="pagination">
       {% if pagination.has_prev %}
-        <a href="{{ url_for('client', page=pagination.prev_num, per_page=per_page, search=search) }}">Anterior</a>
+        <a href="{{ url_for('clients.client', page=pagination.prev_num, per_page=per_page, search=search) }}">Anterior</a>
       {% endif %}
       <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
       {% if pagination.has_next %}
-        <a href="{{ url_for('client', page=pagination.next_num, per_page=per_page, search=search) }}">Próxima</a>
+        <a href="{{ url_for('clients.client', page=pagination.next_num, per_page=per_page, search=search) }}">Próxima</a>
       {% endif %}
     </div>
   </div>

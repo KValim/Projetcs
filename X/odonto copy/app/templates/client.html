@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <h2 class="text-center mb-4">Lista de Pacientes</h2>
+    <div class="top-bar">
+      <form class="search-form" method="GET" action="/client">
+        <input type="text" name="search" placeholder="Pesquisar por nome" value="{{ search }}">
+        <input type="number" name="per_page" placeholder="Qtd. por página" value="{{ per_page }}">
+        <input type="submit" value="Pesquisar">
+      </form>
+    </div>
+    <a href="/client_new" class="btn btn-primary">Adicionar Novo Paciente</a>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Data de Nascimento</th>
+          <th>CPF</th>
+          <th>Telefone</th>
+          <th>Email</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in pagination.items %}
+          <tr>
+            <td>{{ client.id }}</td>
+            <td>{{ client.name }}</td>
+            <td>{{ client.birthday.strftime('%d/%m/%Y') }}</td>
+            <td>{{ client.cpf }}</td>
+            <td>{{ format_phone_number(client.phone) }}</td>
+            <td>{{ client.email }}</td>
+            <td>
+              <a href="{{ url_for('client_edit', client_id=client.id) }}" class="btn btn-custom btn-sm rounded-pill">Editar</a>
+              <a href="#" class="btn btn-custom btn-sm rounded-pill delete-btn" data-id="{{ client.id }}">Excluir</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="pagination">
+      {% if pagination.has_prev %}
+        <a href="{{ url_for('client', page=pagination.prev_num, per_page=per_page, search=search) }}">Anterior</a>
+      {% endif %}
+      <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
+      {% if pagination.has_next %}
+        <a href="{{ url_for('client', page=pagination.next_num, per_page=per_page, search=search) }}">Próxima</a>
+      {% endif %}
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      console.log("JavaScript is running!");
+      $('.delete-btn').on('click', function(e) {
+        e.preventDefault();
+        var btn = $(this);
+        var clientId = btn.data('id');
+        console.log("Button clicked, client ID: " + clientId);
+        if (btn.hasClass('btn-confirm')) {
+          window.location.href = "/delete_client/" + clientId;
+        } else {
+          btn.addClass('btn-confirm').text('! Excluir !');
+        }
+      });
+    });
+  </script>
+{% endblock %}
