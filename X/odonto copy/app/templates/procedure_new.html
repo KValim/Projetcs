@@ -1,0 +1,25 @@
+{% extends 'procedure.html' %}
+
+{% block content %}
+    <h2>Adicionar Procedimento</h2>
+    <form method="POST">
+        <label for="name">Procedimento:</label>
+        <input type="text" name="name" placeholder="Limpeza" required>
+        <br>
+        <label for="description">Descrição:</label>
+        <input type="text" name="description" placeholder="Limzepa de rotina" required>
+        <br>
+        <label for="price">Preço:</label>
+        <input type="number"  name="price" placeholder="100" required>
+        <br>
+        <input type="submit" value="Salvar">
+    </form>
+    {% if error %}
+    <script type="text/javascript">
+        alert("{{ error }}");
+    </script>
+    {% endif %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    
+{% endblock %}

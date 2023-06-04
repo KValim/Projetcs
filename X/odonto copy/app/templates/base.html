@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <h2 class="title">Anya Dental Studio</h2>
+    <!-- Adicione suas folhas de estilo e/ou arquivos JavaScript aqui -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body> 
+    <header>
+        <h1></h1>
+    </header>
+    
+    <nav>
+        <!-- Adicione seus lin  ks de navegação aqui, por exemplo: -->
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('client') }}">Paciente</a>
+        <a href="{{ url_for('procedure') }}">Procedimento</a>
+        <a href="{{ url_for('del_db') }}">Delete DB</a>
+        <a href="{{ url_for('create_db') }}">Create DB</a>
+    </nav>
+    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2023 - Anya Dental Studio</p>
+    </footer>
+    
+</body>
+</html>

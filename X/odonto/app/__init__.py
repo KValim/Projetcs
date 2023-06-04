@@ -1,11 +1,14 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from .database import db
+from .routes.client_routes import clients, register_filters
+from .routes.procedure_routes import procedures
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myproject.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_object('config')
 
-db = SQLAlchemy(app)
+app.register_blueprint(clients)
+app.register_blueprint(procedures)
 
-migrate = Migrate(app, db)
+register_filters(app)
+
+db.init_app(app)
