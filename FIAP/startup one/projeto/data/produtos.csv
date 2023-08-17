@@ -1,0 +1,11 @@
+Especie,Raca,Nome,Preço,Imagem,Descrição
+Cachorro,Pug,Roupinha para Pug,39.99,images\roupinha_para_pug.png,"Uma linda roupinha feita especialmente para pugs. Seu pug vai ficar ainda mais charmoso com esse modelo único."
+Cachorro,Pug,Coleira Personalizada para Pug,18.5,images\Coleira Personalizada para Pug.png,"Coleira feita sob medida para pugs, com detalhes personalizados. Garanta a segurança e o estilo do seu pug com essa coleira exclusiva."
+Gato,Siames,Roupinha para Siames,39.99,images\roupinha_para_siames.png,"Uma linda roupinha feita especialmente para siameses. Seu siames vai ficar ainda mais charmoso com esse modelo único."
+Gato,Todos,Brinquedo de Mola Gato,9.9,images\brinquedo_gato.png,"Sem Descrição."
+Todos,Todos,Comedouro Automático,55.0,images\comedouro_automatico.png,"Comedouro automático para pets que permite alimentá-los com facilidade e precisão. Ideal para garantir que seu pet receba suas refeições em horários regulares."
+Gato,Todos,Arranhador para Gatos,29.9,images\Arranhador para Gatos.png,"Arranhador resistente e atraente para gatos, proporcionando um local adequado para que seu gato possa afiar as unhas e se exercitar."
+Cachorro,Pug,Cama Aconchegante para Pug,49.99,images\cama_aconchegante_para_pug.png,"Uma cama super confortável projetada especialmente para pugs. Seu pug terá um sono tranquilo e revigorante nessa cama."
+Cachorro,Pug,Brinquedo de Morder para Pug,12.99,images\brinquedo_morder_para_pug.png,"Um brinquedo resistente para seu pug se divertir, ajudando na limpeza dos dentes e no alívio do estresse."
+Cachorro,Pug,Shampoo Hidratante para Pug,15.5,images\shampoo_hidratante_para_pug.png,"Shampoo especialmente formulado para a pele sensível dos pugs. Hidrata e limpa suavemente, deixando o pelo do seu pug brilhante."
+Cachorro,Todos,Conjunto de Escovas,24.99,images\conjunto_escovas_para_pug.png,"Conjunto completo de escovas para manter o pelo do seu pug desembaraçado, limpo e saudável."

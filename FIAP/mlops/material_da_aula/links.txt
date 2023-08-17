@@ -1,0 +1,27 @@
+https://github.com/vfcarida/MLOPS_class
+
+https://github.com/vfcarida/awesome-mlops
+
+https://www.kaggle.com/competitions/spaceship-titanic/overview
+
+https://colab.research.google.com/drive/1DrgyaC-oKbuj1wm2-a6_UXguCpOqOlQt?usp=sharing
+
+https://www.tensorflow.org/
+
+https://github.com/GoogleCloudPlatform/fraudfinder
+
+https://github.com/GoogleCloudPlatform/training-data-analyst/tree/master/courses/machine_learning/deepdive/06_structured
+https://github.com/GoogleCloudPlatform/training-data-analyst/tree/master/courses/machine_learning/deepdive2/end_to_end_ml/solutions
+
+
+1 -Baixar e instalar o vscode (ou similar) 
+https://code.visualstudio.com/download
+
+2 - Baixar e instalar o Docker e Docker composse
+https://www.docker.com/products/docker-desktop/
+
+3 – Baixar e instalar github desktop (ou similiar)
+https://desktop.github.com/
+
+3 – Criar conta no gcp
+https://console.cloud.google.com/

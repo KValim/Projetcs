@@ -1,0 +1,20 @@
+'check': A checkmark icon.
+'info': An information icon.
+'warning': A warning icon.
+'arrow-right': A right-pointing arrow icon.
+'arrow-left': A left-pointing arrow icon.
+'arrow-up': An upward-pointing arrow icon.
+'arrow-down': A downward-pointing arrow icon.
+'search': A search icon.
+'thumbs-up': A thumbs-up icon.
+'thumbs-down': A thumbs-down icon.
+'heart': A heart icon.
+'star': A star icon.
+'trash': A trash can icon.
+'download': A download icon.
+'upload': An upload icon.
+'play': A play icon.
+'pause': A pause icon.
+'stop': A stop icon.
+'volume-up': A volume-up icon.
+'volume-down': A volume-down icon.

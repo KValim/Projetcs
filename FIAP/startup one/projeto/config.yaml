@@ -1,0 +1,21 @@
+cookie:
+  expiry_days: 30
+  key: some_signature_key
+  name: some_cookie_name
+credentials:
+  usernames:
+    dvivona:
+      email: deborahnv@gmail.com
+      name: Deborah Vivona
+      password: $2b$12$INFIKdjkL.FsudpA1gkEJuy3uYZP3ut1edOuAKC9Ce7ldOB2xTQ2K
+    gsecco:
+      email: gustavo.secco@123
+      name: Gustavo
+      password: $2b$12$DMKnWM5vQjl/zoxqcMkXyu5eNKlTN9S1iJnVtC1gKT3bGZw3nR95C
+    kvalim:
+      email: kaiquevalim23@gmail.com
+      name: Kaique Valim
+      password: $2b$12$hCpcHAcxV0dhWUNrJMFl3e7ASwEl6Chst3kvRPPAE9v9PFAB0yRn2
+preauthorized:
+  emails:
+  - melsby@gmail.com
