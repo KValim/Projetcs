@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Agendamentos</h1>
+    <a href="{{ url_for('appointment_new') }}">Novo Agendamento</a> <!-- Botão para novo agendamento -->
+    <ul>
+        {% for appointment in appointments %}
+            <li>{{ appointment.id }} - {{ appointment.client_id }} - {{ appointment.client_procedure_id }} - {{ appointment.appointment_date }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

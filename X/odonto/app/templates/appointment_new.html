@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Novo Agendamento</h1>
+    <form method="post">
+        <label for="client_id">Cliente:</label>
+        <select name="client_id" id="client_id">
+            {% for client in clients %}
+                <option value="{{ client.id }}">{{ client.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="procedure_id">Procedimento:</label>  <!-- Novo campo -->
+        <select name="procedure_id" id="procedure_id">
+            {% for procedure in procedures %}
+                <option value="{{ procedure.id }}">{{ procedure.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="client_procedure_id">Procedimento:</label>
+        <select name="client_procedure_id" id="client_procedure_id">
+            {% for procedure in procedures %}
+                <option value="{{ procedure.id }}">{{ procedure.name }}</option>
+            {% endfor %}
+        </select>
+
+
+        <label for="appointment_date">Data e Hora:</label>
+        <input type="datetime-local" name="appointment_date" id="appointment_date">
+        
+        <button type="submit">Agendar</button>
+    </form>
+{% endblock %}

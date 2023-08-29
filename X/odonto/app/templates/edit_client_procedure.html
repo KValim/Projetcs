@@ -1,0 +1,42 @@
+{% extends 'client.html' %}
+
+{% block content %}
+    <h2>Adicionar Procedimento para {{ client.name }}</h2>
+    <form id="procedureForm" method="POST">
+        <label for="procedure_id">Escolha um procedimento:</label>
+        <select name="procedure_id" class="custom-select" required>
+            {% for procedure in procedures %}
+            <option value="{{ procedure.id }}">{{ procedure.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="duration">Duração:</label>
+        <select name="duration" class="custom-select" required>
+            {% for i in range(0, 25) %}
+            <option value="{{ i * 0.5 }}">{{ i * 0.5 }} h</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Dentes Envolvidos:</label>
+        <div style="display: grid; grid-template-columns: repeat(10, 1fr); grid-gap: 10px;">
+            {% set teeth_involved = client_procedure.teeth_involved.split(',') if client_procedure.teeth_involved else [] %}
+            {% for i in range(11, 51) %}
+            <div style="width: 50px; text-align: center;">
+                <div>{{ i }}</div>
+                <input type="checkbox" name="teeth" value="{{ i }}" style="width: 20px; height: 20px;" {% if i|string in teeth_involved %}checked{% endif %}>
+            </div>
+            {% endfor %}
+        </div>
+        <input type="hidden" id="teeth_involved" name="teeth_involved">
+        <br>
+        <input type="submit" value="Salvar" class="custom-button">
+    </form>
+    <a href="{{ url_for('client_procedures', client_id=client.id) }}" class="btn btn-secondary">Voltar</a>
+    <script>
+        document.getElementById('procedureForm').addEventListener('submit', function(e) {
+            const checkboxes = document.querySelectorAll('input[name="teeth"]:checked');
+            const teeth = Array.from(checkboxes).map(cb => cb.value).join(',');
+            document.getElementById('teeth_involved').value = teeth;
+        });
+    </script>
+{% endblock %}

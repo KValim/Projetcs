@@ -13,6 +13,20 @@
   margin-top: 20px; /* Adiciona margem superior */
 }
 
+.custom-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.custom-button {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+}
 
 body {
   /* Configura a imagem de fundo, fonte, cor de fundo e layout do body */

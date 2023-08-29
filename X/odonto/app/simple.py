@@ -53,6 +53,34 @@ class Procedure(db.Model):
         self.price = price
 
 
+class ClientProcedure(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    client_id = db.Column(db.Integer, db.ForeignKey('client.id'), nullable=False)
+    procedure_id = db.Column(db.Integer, db.ForeignKey('procedure.id'), nullable=False)
+    duration = db.Column(db.String(10), nullable=True)
+    teeth_involved = db.Column(db.String(50), nullable=True)
+    procedure = db.relationship('Procedure', backref='client_procedures')
+
+    def __init__(self, client_id, procedure_id, duration=None, teeth_involved=None):
+        self.client_id = client_id
+        self.procedure_id = procedure_id
+        self.duration = duration
+        self.teeth_involved = teeth_involved
+
+class Appointment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    client_id = db.Column(db.Integer, db.ForeignKey('client.id'), nullable=False)
+    client_procedure_id = db.Column(db.Integer, db.ForeignKey('client_procedure.id'), nullable=False)
+    appointment_date = db.Column(db.DateTime, nullable=False)
+
+    def __init__(self, client_id, client_procedure_id, appointment_date):
+        self.client_id = client_id
+        self.client_procedure_id = client_procedure_id
+        self.appointment_date = appointment_date
+
+
+
+
 
 ### DB
 
@@ -326,6 +354,164 @@ def delete_procedure(procedure_id):
     db.session.delete(procedure)
     db.session.commit()
     return redirect(url_for('procedure')) 
+
+
+### CLIENT PROCEDURE
+
+@app.route('/client_procedures/<int:client_id>')
+def client_procedures(client_id):
+    client = Client.query.get(client_id)
+    if client is None:
+        return redirect(url_for('error_page'))
+
+    procedures = ClientProcedure.query.filter_by(client_id=client_id).all()
+    return render_template('client_procedures.html', client=client, procedures=procedures)
+
+
+@app.route('/add_procedure_to_client/<int:client_id>', methods=['GET', 'POST'])
+def add_procedure_to_client(client_id):
+    client = Client.query.get(client_id)
+    if client is None:
+        return redirect(url_for('error_page'))
+    
+    if request.method == 'POST':
+        procedure_id = request.form.get('procedure_id')
+        duration = request.form.get('duration')
+        teeth_involved = request.form.get('teeth_involved')
+
+        client_procedure = ClientProcedure(client_id, procedure_id, duration, teeth_involved)
+        db.session.add(client_procedure)
+        db.session.commit()
+        
+        return redirect(url_for('client_procedures', client_id=client_id))
+
+    procedures = Procedure.query.all()
+    return render_template('add_procedure_to_client.html', client=client, procedures=procedures)
+
+@app.route('/edit_client_procedure/<int:client_procedure_id>', methods=['GET', 'POST'])
+def edit_client_procedure(client_procedure_id):
+    client_procedure = ClientProcedure.query.get(client_procedure_id)
+    if client_procedure is None:
+        return redirect(url_for('error_page'))
+
+    client = Client.query.get(client_procedure.client_id)
+    if client is None:
+        return redirect(url_for('error_page'))
+
+    if request.method == 'POST':
+        try:
+            # Capture os dados do formulário
+            procedure_id = request.form.get('procedure_id')
+            duration = request.form.get('duration')
+            teeth_involved = request.form.get('teeth_involved')
+
+            # Verifique se os campos estão vazios
+            if not procedure_id or not duration:
+                return "Campos obrigatórios estão vazios", 400
+
+            # Atualize os campos
+            client_procedure.procedure_id = procedure_id
+            client_procedure.duration = duration
+            client_procedure.teeth_involved = teeth_involved
+
+            # Faça o commit das alterações
+            db.session.commit()
+            return redirect(url_for('client_procedures', client_id=client.id))
+
+        except Exception as e:
+            # Faça o rollback em caso de erro e imprima a exceção para depuração
+            db.session.rollback()
+            print("Erro: ", e)
+            return "Ocorreu um erro ao atualizar o procedimento", 500
+
+
+
+    procedures = Procedure.query.all()
+    procedure = Procedure.query.get(client_procedure.procedure_id)
+
+    return render_template('edit_client_procedure.html', client=client, client_procedure=client_procedure, procedures=procedures, procedure=procedure)
+
+
+@app.route('/delete_client_procedure/<int:client_procedure_id>', methods=['POST'])
+def delete_client_procedure(client_procedure_id):
+    """Exclui um procedimento associado a um cliente."""
+    client_procedure = ClientProcedure.query.get(client_procedure_id)
+    if client_procedure is None:
+        return redirect(url_for('error_page'))
+
+    client_id = client_procedure.client_id
+    db.session.delete(client_procedure)
+    db.session.commit()
+    return redirect(url_for('client_procedures', client_id=client_id))
+
+
+### AGENDA
+# Exibir agendamentos
+@app.route('/appointments')
+def appointments():
+    all_appointments = Appointment.query.all()
+    return render_template('appointments.html', appointments=all_appointments)
+
+# Novo agendamento
+@app.route('/appointment_new', methods=['GET', 'POST'])
+@app.route('/appointment_new/<int:client_id>/<int:procedure_id>', methods=['GET', 'POST'])
+def appointment_new(client_id=None, procedure_id=None):
+    if request.method == 'POST':
+        client_id = request.form.get('client_id')
+        procedure_id = request.form.get('client_procedure_id')  # Certifique-se de que este valor está sendo capturado
+        appointment_date = request.form.get('appointment_date')
+
+        if not client_id or not procedure_id or not appointment_date:
+            flash('Todos os campos são obrigatórios', 'error')
+            return redirect(request.url)
+        
+        appointment_date = datetime.strptime(appointment_date, '%Y-%m-%dT%H:%M')
+        
+        new_appointment = Appointment(
+            client_id=client_id, 
+            client_procedure_id=procedure_id,  # Certifique-se de que este valor está sendo passado
+            appointment_date=appointment_date
+        )
+        db.session.add(new_appointment)
+        db.session.commit()
+        flash('Agendamento criado com sucesso!', 'success')
+        return redirect(url_for('appointments'))
+
+
+    # Obter informações do cliente e do procedimento para pré-preencher o formulário
+    clients = db.session.query(Client).all()  # Substitua Client pelo seu modelo de Cliente
+    procedures = db.session.query(Procedure).all()  # Substitua Procedure pelo seu modelo de Procedimento
+
+    return render_template(
+        'appointment_new.html', 
+        clients=clients, 
+        procedures=procedures, 
+        selected_client_id=client_id, 
+        selected_procedure_id=procedure_id
+    )
+
+# Editar agendamento
+@app.route('/appointment_edit/<int:appointment_id>', methods=['GET', 'POST'])
+def appointment_edit(appointment_id):
+    appointment = Appointment.query.get(appointment_id)
+    if request.method == 'POST':
+        appointment.client_id = request.form.get('client_id')
+        appointment.client_procedure_id = request.form.get('client_procedure_id')
+        appointment.appointment_date = request.form.get('appointment_date')
+
+        db.session.commit()
+        return redirect(url_for('appointments'))
+
+    clients = Client.query.all()
+    return render_template('appointment_edit.html', appointment=appointment, clients=clients)
+
+# Excluir agendamento
+@app.route('/delete_appointment/<int:appointment_id>', methods=['GET', 'POST'])
+def delete_appointment(appointment_id):
+    appointment = Appointment.query.get(appointment_id)
+    db.session.delete(appointment)
+    db.session.commit()
+    return redirect(url_for('appointments'))
 
 
 

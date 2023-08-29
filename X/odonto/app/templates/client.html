@@ -32,8 +32,9 @@
             <td>{{ format_phone_number(client.phone) }}</td>
             <td>{{ client.email }}</td>
             <td>
-              <a href="{{ url_for('clients.client_edit', client_id=client.id) }}" class="btn btn-custom btn-sm rounded-pill">Editar</a>
+              <a href="{{ url_for('client_edit', client_id=client.id) }}" class="btn btn-custom btn-sm rounded-pill">Editar</a>
               <a href="#" class="btn btn-custom btn-sm rounded-pill delete-btn" data-id="{{ client.id }}">Excluir</a>
+              <a href="{{ url_for('client_procedures', client_id=client.id) }}" class="btn btn-info btn-sm rounded-pill">Procedimentos</a>
             </td>
           </tr>
         {% endfor %}

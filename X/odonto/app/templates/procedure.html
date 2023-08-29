@@ -29,7 +29,7 @@
             <td>{{ procedure.price|currency_format }}</td>
 
             <td>
-              <a href="{{ url_for('procedures.procedure_edit', procedure_id=procedure.id) }}" class="btn btn-custom btn-sm rounded-pill">Editar</a>
+              <a href="{{ url_for('procedure_edit', procedure_id=procedure.id) }}" class="btn btn-custom btn-sm rounded-pill">Editar</a>
               <a href="#" class="btn btn-custom btn-sm rounded-pill delete-btn" data-id="{{ procedure.id }}">Excluir</a>
             </td>
           </tr>
@@ -38,11 +38,11 @@
     </table>
     <div class="pagination">
       {% if pagination.has_prev %}
-        <a href="{{ url_for('procedures.procedure', page=pagination.prev_num, per_page=per_page, search=search) }}">Anterior</a>
+        <a href="{{ url_for('procedure', page=pagination.prev_num, per_page=per_page, search=search) }}">Anterior</a>
       {% endif %}
       <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
       {% if pagination.has_next %}
-        <a href="{{ url_for('procedures.procedure', page=pagination.next_num, per_page=per_page, search=search) }}">Próxima</a>
+        <a href="{{ url_for('procedure', page=pagination.next_num, per_page=per_page, search=search) }}">Próxima</a>
       {% endif %}
     </div>
   </div>
