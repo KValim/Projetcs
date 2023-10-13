@@ -1,0 +1,17 @@
+# Usar uma imagem base com Python e Jupyter
+FROM jupyter/base-notebook
+
+# Instalar bibliotecas para suporte a GPU (se necessário)
+# RUN apt-get update && apt-get install -y libnvidia-compute-460
+
+# Instalar pacotes de desenvolvimento
+RUN apt-get update && \
+    apt-get install -y build-essential
+
+# Copiar o arquivo requirements.txt para o contêiner
+COPY requirements.txt /tmp/
+
+# Instalar as dependências do Python
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Configurações adicionais, se necessário

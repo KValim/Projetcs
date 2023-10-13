@@ -1,0 +1,2 @@
+docker build -t rl_img .
+docker run -p 8888:8888 rl_img

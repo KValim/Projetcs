@@ -4,3 +4,9 @@ Datasets/
 Digitos.zip
 fruits.zip
 .gitignore
+Reinforcement Learning_Aula_1.mp4
+Reinforcement Learning_Aula_2.mp4
+Reinforcement Learning_Aula_3.mp4
+.env
+__pycache__
+.gitignore

@@ -1,0 +1,13 @@
+pygame==2.5.1
+numpy==1.23.5
+huggingface_hub
+wheel
+pickle5==0.0.11
+pyyaml==6.0
+gym==0.24
+imageio==2.31.3
+imageio-ffmpeg==0.4.8
+pyglet==1.5.1
+tqdm==4.66.1
+xvfbwrapper==0.2.9
+PyVirtualDisplay==3.0
